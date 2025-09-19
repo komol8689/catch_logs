@@ -14,7 +14,6 @@ export class AllExceptionFilter implements ExceptionFilter {
     catch(exception: any, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const res = ctx.getResponse();
-        const req = ctx.getRequest();
 
         const status =
             exception instanceof HttpException
@@ -29,7 +28,7 @@ export class AllExceptionFilter implements ExceptionFilter {
         });
 
         if (status === 500) {
-            console.log('Global error: ', exception);
+            console.log('Global error: ', exception.message);
         }
 
         let errorMessage = 'Internal server error';
