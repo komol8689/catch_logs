@@ -1,9 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { RegisService } from './regis.service';
 import { CreateRegiDto } from './dto/create-regi.dto';
-import { UpdateRegiDto } from './dto/update-regi.dto';
 
-@Controller('regis')
+@Controller('user')
 export class RegisController {
   constructor(private readonly regisService: RegisService) {}
 
@@ -15,6 +14,11 @@ export class RegisController {
   @Get()
   findAll() {
     return this.regisService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.regisService.findOneById(+id);
   }
 
   @Delete(':id')

@@ -5,6 +5,7 @@ import { IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString, IsStrongPas
 
 export class CreateRegiDto {
     // -------------------- FULL NAME --------------------
+    
     @ApiProperty({
         name: 'full_name',
         description: 'Email for registration',
@@ -17,7 +18,8 @@ export class CreateRegiDto {
     full_name: string
 
     // -------------------- EMAIL --------------------
-     @ApiProperty({
+
+    @ApiProperty({
         name: 'email',
         description: 'Email for enter',
         example: 'www.example1234@gmail.com',
@@ -28,10 +30,11 @@ export class CreateRegiDto {
     email: string
 
     // -------------------- PASSWORD --------------------
+
     @ApiProperty({
-        name: 'email',
+        name: 'password',
         description: 'Password for registration',
-        example: '',
+        example: 'User!@Admin123',
         required: true
     })
     @IsStrongPassword()
@@ -40,6 +43,7 @@ export class CreateRegiDto {
     password: string
 
     // -------------------- AGE --------------------
+
     @ApiProperty({
         name: 'age',
         description: 'Age for registration',
@@ -52,6 +56,7 @@ export class CreateRegiDto {
     age: number
 
     // -------------------- IS MARRIED --------------------
+
     @ApiProperty({
         name: 'is_married',
         description: 'Married for registration',

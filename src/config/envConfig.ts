@@ -9,7 +9,7 @@ export interface IConfig {
         USER: string
         PASS: string
         HOST: string
-        PORT: string
+        PORT: number
         NAME: string
     },
     API_VERSION:string
@@ -23,7 +23,7 @@ export const config: IConfig = {
         USER: String(process.env.DB_USER),
         PASS: String(process.env.DB_PASS),
         HOST: String(process.env.DB_HOST),
-        PORT: String(process.env.DB_PORT),
+        PORT: Number(process.env.DB_PORT),
         NAME: String(process.env.DB_NAME),
     },
     API_VERSION:String(process.env.API_VERSION)
