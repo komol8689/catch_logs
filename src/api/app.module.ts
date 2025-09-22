@@ -6,8 +6,6 @@ import { config } from 'src/config/envConfig';
 import { WinstonService } from 'src/common/winston/Winston';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionFilter } from 'src/common/exception/all-exception';
-// import { MetricsService } from 'src/common/grafana/metrics.service';
-// import { MetricsController } from 'src/common/grafana/metrics.controller';
 import { ErrorEntity } from 'src/core/entities/error.entity';
 import { InfoEntity } from 'src/core/entities/info.entity';
 import { RegisEntity } from 'src/core/entities/regis.entity';
@@ -29,10 +27,8 @@ import { RegisEntity } from 'src/core/entities/regis.entity';
     RegisModule,
     LoginModule,
   ],
-  // controllers: [MetricsController],
   providers: [
     WinstonService,
-    // MetricsService,
     {
       provide: APP_FILTER,
       useClass: AllExceptionFilter,
