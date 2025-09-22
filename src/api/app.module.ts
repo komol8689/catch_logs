@@ -22,7 +22,7 @@ import { RegisEntity } from 'src/core/entities/regis.entity';
 
       autoLoadEntities: true,
       synchronize: true,
-      entities: [ErrorEntity, InfoEntity, RegisEntity],
+      entities: [ErrorEntity, InfoEntity],
     }),
     RegisModule,
     LoginModule,
