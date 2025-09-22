@@ -8,7 +8,6 @@ import { config } from 'src/config/envConfig';
 export class Application {
   static async main(): Promise<void> {
     const app = await NestFactory.create(AppModule);
-    // app.useGlobalFilters(new AllExceptionFilter)
 
     // ------------------ VALIDATSIYA ------------------
 

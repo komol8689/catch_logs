@@ -1,18 +1,27 @@
+import { InfoEntity } from 'src/core/entities/info.entity';
 import { WinstonService } from '../winston/Winston';
+import { AppDataSource } from './data-source';
 
 export interface ISuccess {
   data: object;
   message: boolean;
   statusCode: number;
 }
+
 const winston = new WinstonService();
 
-export const successRes = (
+export const successRes = async (
   data: object,
   statusCode: number = 200,
-): ISuccess => {
+): Promise<ISuccess> => {
+  // Winston log
+  winston.log('Success Response', { data, statusCode });
 
-  winston.log('Success Repsonse', { data, statusCode });
+  // DB ga saqlash
+  const repo = AppDataSource.getRepository(InfoEntity); // repository o‘zgaruvchisi
+  const successRecord = repo.create({ data, statusCode });
+  await repo.save(successRecord);
+
   return {
     data,
     message: true,

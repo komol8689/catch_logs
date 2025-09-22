@@ -1,37 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+} from 'typeorm';
+import { BaseEntity } from './base.entity';
 
-@Entity('Admin')
-export class RegisEntity {
-    // -------------------- ID --------------------
+@Entity('regis')
+export class RegisEntity extends BaseEntity {
+  // -------------------- FULL NAME --------------------
+  @Column({ type: 'varchar', length: 255 })
+  full_name: string;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  // -------------------- EMAIL --------------------
+  @Column({ type: 'varchar', length: 255, unique: true })
+  email: string;
 
-    // -------------------- FULL NAME --------------------
-    @Column({ type: 'varchar', length: 255 })
-    full_name: string;
+  // -------------------- PASSWORD --------------------
+  @Column({ type: 'varchar', length: 255 })
+  hash_password: string;
 
-    // -------------------- EMAIL --------------------
-    @Column({ type: 'varchar', length: 255, unique: true })
-    email: string;
+  // -------------------- AGE --------------------
+  @Column({ type: 'int' })
+  age: number;
 
-    // -------------------- PASSWORD --------------------
-    @Column({ type: 'varchar', length: 255 })
-    hash_password: string;
-
-    // -------------------- AGE --------------------
-    @Column({ type: 'int' })
-    age: number;
-
-    // -------------------- IS MARRIED --------------------
-    @Column({ type: 'boolean', default: false })
-    is_married: boolean;
-
-    // -------------------- CREATED AT --------------------
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
-
+  // -------------------- IS MARRIED --------------------
+  @Column({ type: 'boolean', default: false })
+  is_married: boolean;
 }
