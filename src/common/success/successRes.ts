@@ -1,13 +1,21 @@
-export interface ISuccess {
-    data: object,
-    message: boolean,
-    statusCode: number
-}
+import { WinstonService } from '../winston/Winston';
 
-export const successRes = (data: object, statusCode: number = 200): ISuccess => {
-    return {
-        data,
-        message: true,
-        statusCode
-    }
+export interface ISuccess {
+  data: object;
+  message: boolean;
+  statusCode: number;
 }
+const winston = new WinstonService();
+
+export const successRes = (
+  data: object,
+  statusCode: number = 200,
+): ISuccess => {
+
+  winston.log('Success Repsonse', { data, statusCode });
+  return {
+    data,
+    message: true,
+    statusCode,
+  };
+};
