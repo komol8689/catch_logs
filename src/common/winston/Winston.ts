@@ -5,7 +5,7 @@ import * as winston from 'winston';
 export class WinstonService {
   private readonly logger: winston.Logger;
 
-  filterOnly = (level: string) =>
+  public filterOnly = (level: string) =>
     winston.format((info) => {
       return info.level === level ? info : false;
     })();
@@ -20,7 +20,7 @@ export class WinstonService {
               timestamp,
               level,
               message,
-              ...meta, 
+              ...meta,
             },
             null,
             2,
@@ -30,11 +30,11 @@ export class WinstonService {
       transports: [
         new winston.transports.File({
           filename: 'logs/info.log',
-          level: 'info',
+          format: this.filterOnly('info'),
         }),
         new winston.transports.File({
           filename: 'logs/error.log',
-          level: 'error',
+          format: this.filterOnly('error'),
         }),
       ],
     });
