@@ -37,7 +37,7 @@ export class RegisService {
     const data = this.user.create({ email, hash_password, ...rest });
 
     // save db
-    await this.user.save(data);
+    // await this.user.save(data);
 
     // success
     return successRes(data, 201);

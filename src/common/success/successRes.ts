@@ -18,8 +18,11 @@ export const successRes = async (
   winston.log('Success Response', { data, statusCode });
 
   // DB ga saqlash
-  const repo = AppDataSource.getRepository(InfoEntity); // repository o‘zgaruvchisi
+  
+  const repo =AppDataSource.getRepository(InfoEntity);
+  
   const successRecord = repo.create({ data, statusCode });
+  
   await repo.save(successRecord);
 
   return {

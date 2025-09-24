@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { config } from 'src/config/envConfig';
+import { AppDataSource } from 'src/common/success/data-source';
 
 @Injectable()
 export class Application {
@@ -32,7 +33,16 @@ export class Application {
 
     const documentSwagger = SwaggerModule.createDocument(app, configSwagger);
     SwaggerModule.setup(config.API_VERSION, app, documentSwagger);
+    // --------------- INITIALIZE ----------------
 
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Data Source has been initialized!');
+  })
+  .catch((err) => {
+    console.error('Error during Data Source initialization:', err);
+  });
+    
     // --------------- PORT ----------------
     const PORT = config.PORT;
     const logging = new Logger('Swagger-library');
