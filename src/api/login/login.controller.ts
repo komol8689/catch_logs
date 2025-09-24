@@ -4,10 +4,20 @@ import { CreateLoginDto } from './dto/create-login.dto';
 
 @Controller('login')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(private readonly loginService: LoginService) { }
 
   @Post()
   create(@Body() createLoginDto: CreateLoginDto) {
     return this.loginService.login(createLoginDto);
+  }
+
+  @Get('error')
+  GetError() {
+    return this.loginService.getError();
+  }
+
+  @Get('info')
+  GetInfo() {
+    return this.loginService.getInfo();
   }
 }
