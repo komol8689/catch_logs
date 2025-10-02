@@ -1,4 +1,4 @@
-import { InfoEntity } from 'src/core/entities/info.entity';
+import { InfoEntity } from '../../core/entities/info.entity';
 import { WinstonService } from '../winston/Winston';
 import { AppDataSource } from './data-source';
 
@@ -18,16 +18,13 @@ export const successRes = async (
   winston.log('Success Response', { data, statusCode });
 
   // DB ga saqlash
-  
-  const repo =AppDataSource.getRepository(InfoEntity);
-  
+  const repo = AppDataSource.getRepository(InfoEntity);
   const successRecord = repo.create({ data, statusCode });
-  
   await repo.save(successRecord);
 
   return {
-    data,
-    message: true,
     statusCode,
+    message: true,
+    data,
   };
 };

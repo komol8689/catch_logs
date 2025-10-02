@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RegisEntity } from 'src/core/entities/regis.entity';
 import { Repository } from 'typeorm';
-import { CryptoService } from 'src/common/crypto/Crypto';
-import { successRes } from 'src/common/success/successRes';
-import { ErrorEntity } from 'src/core/entities/error.entity';
-import { InfoEntity } from 'src/core/entities/info.entity';
+import { RegisEntity } from '../../core/entities/regis.entity';
+import { CryptoService } from '../../common/crypto/Crypto';
+import { ErrorEntity } from '../../core/entities/error.entity';
+import { InfoEntity } from '../../core/entities/info.entity';
+import { successRes } from '../../common/success/successRes';
+
 
 @Injectable()
 export class LoginService {
@@ -16,8 +17,8 @@ export class LoginService {
     private readonly crypto: CryptoService,
     @InjectRepository(ErrorEntity)
     private readonly error: Repository<ErrorEntity>,
-     @InjectRepository(InfoEntity)
-    private readonly info:Repository<InfoEntity>,
+    @InjectRepository(InfoEntity)
+    private readonly info: Repository<InfoEntity>,
   ) { }
   // --------------- LOG IN ---------------
 
@@ -40,14 +41,14 @@ export class LoginService {
     return successRes(exist)
   }
 
-    // --------------- GET ERROR ---------------
+  // --------------- GET ERROR ---------------
   async getError() {
-    return await this.error.find({where:{isDeleted:false},take:100})
+    return await this.error.find({ where: { isDeleted: false }, take: 100, order: { createdAt: 'DESC' } })
   }
-  
-  
-    // --------------- GET INFO ---------------
- async getInfo() {
-    return await this.info.find({where:{isDeleted:false},take:100})
+
+
+  // --------------- GET INFO ---------------
+  async getInfo() {
+    return await this.info.find({ where: { isDeleted: false }, take: 100, order: { createdAt: 'DESC' } })
   }
 }
