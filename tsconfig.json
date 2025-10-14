@@ -1,43 +1,31 @@
 {
   "compilerOptions": {
-    /* Module system */
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "target": "ES2023",
-    "lib": ["ES2023"],
-
-    /* Project structure */
-    "baseUrl": "src",
-    "paths": { "*": ["*"] },
-    "outDir": "./dist",
-
-    /* Module interop */
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolvePackageJsonExports": true,
-    "resolveJsonModule": true,
-    
-    /* TypeScript features */
+    "module": "commonjs",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    
-    /* Strictness */
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-
-    /* Build optimizations */
-    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
     "sourceMap": true,
-    "isolatedModules": false
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strict": true,
+
+    // 🔽 Quyidagini qo‘shamiz — aynan shu xatoni tuzatadi:
+    "strictPropertyInitialization": false,
+
+    // ✅ src ni alias sifatida ishlatish uchun
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+
+    // 🔽 Type declarationlarni yo‘qotmaslik uchun
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
