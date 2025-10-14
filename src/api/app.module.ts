@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { RegisModule } from './regis/regis.module';
+import { RegisModule } from './registration/regis.module';
 import { LoginModule } from './login/login.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WinstonService } from 'src/common/winston/Winston';
