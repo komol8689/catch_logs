@@ -1,37 +1,8 @@
 import { Module } from '@nestjs/common';
-import { RegisModule } from './registration/regis.module';
-import { LoginModule } from './login/login.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { WinstonService } from 'src/common/winston/Winston';
-import { APP_FILTER } from '@nestjs/core';
-import { AllExceptionFilter } from 'src/common/exception/all-exception';
-import { ErrorEntity } from 'src/core/entities/error.entity';
-import { InfoEntity } from 'src/core/entities/info.entity';
-import { config } from '../config/envConfig'
-@Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      username: config.DB.USER,
-      host: config.DB.HOST,
-      password: config.DB.PASS,
-      port: config.DB.PORT,
-      database: config.DB.NAME,
+import { UserModule } from './user/user.module';
 
-      autoLoadEntities: true,
-      synchronize: true,
-      entities: [ErrorEntity, InfoEntity],
-    }),
-    RegisModule,
-    LoginModule,
-  ],
-  providers: [
-    WinstonService,
-    {
-      provide: APP_FILTER,
-      useClass: AllExceptionFilter,
-    },
-  ],
-  exports: [WinstonService],
+@Module({
+  imports: [UserModule],
+  providers: [],
 })
 export class AppModule { }

@@ -12,6 +12,9 @@ export class LogService {
   constructor(
     @InjectRepository(InfoLog) private readonly info: MongoRepository<InfoLog>,
     @InjectRepository(ErrorLog) private readonly error: MongoRepository<ErrorLog>,) { }
+
+  // -------------------- CREATE --------------------
+
   async create(dto: CreateLogDto) {
     if (dto.type == type.INFO) {
       return await this.info.save(this.info.create(dto))
@@ -22,6 +25,8 @@ export class LogService {
     }
   }
 
+  // -------------------- FIND ALL --------------------
+
   async findAll(dto: type) {
     if (dto == type.ERROR) {
       return await this.error.find()
@@ -29,6 +34,8 @@ export class LogService {
       return await this.info.find()
     }
   }
+
+  // -------------------- FIND ONE --------------------
 
   async findOne(id: number, dto: type) {
     if (dto == type.ERROR) {
@@ -49,6 +56,8 @@ export class LogService {
   update(id: number, updateLogDto: UpdateLogDto) {
     return `This action updates a #${id} log`;
   }
+
+  // -------------------- REMOVE --------------------
 
   async remove(id: number, dto: type) {
     await this.findOne(id, dto)

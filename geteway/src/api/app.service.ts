@@ -1,25 +1,13 @@
-import { HttpStatus, Injectable, Logger, ValidationPipe } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { config } from 'src/config/envConfig';
-import { AppDataSource } from 'src/common/success/data-source';
 
 @Injectable()
 export class Application {
   static async main(): Promise<void> {
     const app = await NestFactory.create(AppModule);
-
-    // ------------------ VALIDATSIYA ------------------
-
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        transform: true,
-        forbidNonWhitelisted: true,
-        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-      }),
-    );
     // ------------------ SWAGGER ------------------
     const configSwagger = new DocumentBuilder()
       .setTitle('LOGS')
@@ -33,16 +21,7 @@ export class Application {
 
     const documentSwagger = SwaggerModule.createDocument(app, configSwagger);
     SwaggerModule.setup(config.API_VERSION, app, documentSwagger);
-    // --------------- INITIALIZE ----------------
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Data Source has been initialized!');
-  })
-  .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
-  });
-    
     // --------------- PORT ----------------
     const PORT = config.PORT;
     const logging = new Logger('Swagger-library');

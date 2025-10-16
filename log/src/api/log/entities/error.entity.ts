@@ -1,7 +1,7 @@
 import { type } from "src/config/enum";
 import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity('error')
 export class ErrorLog {
     @ObjectIdColumn()
     id: ObjectId

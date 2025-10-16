@@ -1,9 +1,9 @@
 import { type } from "src/config/enum";
-import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity('info')
 export class InfoLog {
-    @ObjectIdColumn()
+    @PrimaryGeneratedColumn()
     id?: ObjectId
 
     @Column({ type: 'text' })

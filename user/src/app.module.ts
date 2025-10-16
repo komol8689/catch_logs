@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from './config/envConfig';
+import { UserModule } from './api/user/user.module';
+
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot({
+    type: 'postgres',
+    url: config.DB_URL,
+    synchronize: true,
+    autoLoadEntities: true,
+    entities: []
+  }), UserModule],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }
