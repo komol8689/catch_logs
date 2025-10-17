@@ -46,7 +46,9 @@ export class UserService {
         data: result,
       };
     } catch (error: any) {
-      this.logsService.send('createLog', { type: type.ERROR, error })
+      await firstValueFrom(
+        this.logsService.send('createLog', { type: type.ERROR, info: JSON.stringify(error) })
+      )
       return {
         success: false,
         message: error.error || 'User yaratishda xatolik',
