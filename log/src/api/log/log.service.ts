@@ -16,6 +16,8 @@ export class LogService {
   // -------------------- CREATE --------------------
 
   async create(dto: CreateLogDto) {
+    console.log(dto);
+
     if (dto.type == type.INFO) {
       return await this.info.save(this.info.create(dto))
     } else if (dto.type == type.ERROR) {

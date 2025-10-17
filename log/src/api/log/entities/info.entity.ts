@@ -1,20 +1,31 @@
-import { type } from "src/config/enum";
-import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { type } from 'src/config/enum';
+import { Entity, ObjectIdColumn, ObjectId, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
 
 @Entity('info')
 export class InfoLog {
-    @PrimaryGeneratedColumn()
-    id?: ObjectId
+    @ObjectIdColumn()
+    _id: ObjectId;
 
-    @Column({ type: 'text' })
-    info!: string
+    @Column()
+    info: string;
 
-    @Column({ type: 'varchar', enum: type, default: type.INFO })
-    type?: string
+    @Column({ enum: type, default: type.INFO })
+    type: string;
 
-    @CreateDateColumn()
-    createdAt?: Date
+    @Column()
+    createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt?: Date
+    @Column()
+    updatedAt: Date;
+
+    @BeforeInsert()
+    setCreatedAt() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    @BeforeUpdate()
+    setUpdatedAt() {
+        this.updatedAt = new Date();
+    }
 }

@@ -10,7 +10,7 @@ import { LogModule } from './api/log/log.module';
     host: config.DATABASE.HOST,
     port: config.DATABASE.PORT,
     database: config.DATABASE.NAME,
-    entities: [],
+    autoLoadEntities: true,
     synchronize: true
   }), LogModule],
   controllers: [],

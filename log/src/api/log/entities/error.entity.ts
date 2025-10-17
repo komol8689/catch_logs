@@ -1,20 +1,32 @@
+import { Entity, ObjectIdColumn, Column, BeforeInsert, BeforeUpdate } from "typeorm";
+import { ObjectId } from "mongodb";
 import { type } from "src/config/enum";
-import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('error')
 export class ErrorLog {
     @ObjectIdColumn()
-    id: ObjectId
+    _id: ObjectId;
 
-    @Column({ type: 'text' })
-    error: string
+    @Column({ enum: type, default: type.INFO })
+    info: string;
 
-    @Column({ type: 'varchar', enum: type, default: type.ERROR })
-    type: string
+    @Column()
+    type: string;
 
-    @CreateDateColumn()
-    createdAt: Date
+    @Column()
+    createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date
+    @Column()
+    updatedAt: Date;
+
+    @BeforeInsert()
+    setCreatedAt() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    @BeforeUpdate()
+    setUpdatedAt() {
+        this.updatedAt = new Date();
+    }
 }
